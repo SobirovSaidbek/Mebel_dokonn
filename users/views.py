@@ -7,9 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, FormView, UpdateView
+from django.views.generic import TemplateView, CreateView, FormView, UpdateView, ListView
+from sympy import Product
 
 from conf import settings
+from products.models import ProductModel
 from users.forms import RegisterForm, EmailVerificationForm, LoginForm, AccountModelForm
 from users.models import VerificationCodeModel, AccountModel
 import random
@@ -136,8 +138,18 @@ class WishlistView(TemplateView):
     template_name = 'users/wishlist.html'
 
 
-class CartView(TemplateView):
+class CartView(ListView):
     template_name = 'users/cart.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        cart = self.request.session.get('cart', [])
+        products = ProductModel.objects.filter(pk__in=cart)
+        return products
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total_price'] = self.calculate_total_price()
 
 
 class ChangePassword(TemplateView):

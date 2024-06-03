@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView
 
 from products.models import ProductModel, ProductCategoryModel, ProductColorModel, ProductTagModel, ProductManufacture, \
@@ -68,3 +68,15 @@ class ProductDetailView(DetailView):
         context['tags'] = ProductTagModel.objects.all()
         context['colors'] = ProductColorModel.objects.all()
         return context
+
+
+def add_or_remove(request, pk):
+    cart = request.session.get('cart', [])
+    if pk in cart:
+        cart.remove(pk)
+
+    else:
+        cart.append(pk)
+
+    request.session['cart'] = cart
+    return redirect(request.GET.get('next', 'products:list'))

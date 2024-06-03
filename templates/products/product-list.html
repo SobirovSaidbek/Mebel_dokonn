@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load my_tags %}
 {% block extra_css %}
 {% endblock %}
 {% block content %}
@@ -224,9 +225,10 @@
                                                                               class="formAddToCart">
                                                                             <input type="hidden" name="id_product"
                                                                                    value="1">
-                                                                            <a class="add-to-cart" href="#"
+                                                                            <a class="add-to-cart" href="{% url 'products:add-or-remove' pk=product.id%}?next={{ request.get_full_path|urlencode }}"
                                                                                data-button-action="add-to-cart">
-                                                                                <i class="fa fa-shopping-cart"
+                                                                                {% in_cart pk as is_in_cart %}
+                                                                                <i {% if is_in_cart %} style="color: red" {% endif %}class="fa fa-shopping-cart"
                                                                                    aria-hidden="true"></i>
                                                                             </a>
                                                                         </form>
