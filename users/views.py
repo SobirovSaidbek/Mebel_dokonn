@@ -3,14 +3,15 @@ from datetime import datetime, timedelta
 
 from django.contrib import messages
 from django.contrib.auth import get_user_model, authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, FormView
+from django.views.generic import TemplateView, CreateView, FormView, UpdateView
 
 from conf import settings
-from users.forms import RegisterForm, EmailVerificationForm, LoginForm
-from users.models import VerificationCodeModel
+from users.forms import RegisterForm, EmailVerificationForm, LoginForm, AccountModelForm
+from users.models import VerificationCodeModel, AccountModel
 import random
 
 UserModel = get_user_model()
@@ -119,18 +120,29 @@ def logout_view(request):
         return redirect(reverse_lazy('pages:home'))
 
 
+class AccountView(LoginRequiredMixin, UpdateView):
+    template_name = 'users/acount.html'
+    form_class = AccountModelForm
+    success_url = reverse_lazy('users:account')
+    context_object_name = 'account'
+    login_url = reverse_lazy('users:login')
+
+    def get_object(self, queryset=None):
+        account, _ = AccountModel.objects.get_or_create(user=self.request.user)
+        return account
+
 
 class WishlistView(TemplateView):
     template_name = 'users/wishlist.html'
 
+
 class CartView(TemplateView):
     template_name = 'users/cart.html'
+
 
 class ChangePassword(TemplateView):
     template_name = 'users/reset-password.html'
 
 
-class AccountView(TemplateView):
-    template_name = 'users/acount.html'
 class CheckoutView(TemplateView):
     template_name = 'products/checkout.html'
