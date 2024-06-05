@@ -159,9 +159,7 @@ class CartView(ListView):
         context['total_price'] = self.calculate_total_price()
         return context
 
+
 class ChangePassword(TemplateView):
     template_name = 'users/reset-password.html'
 
-
-class CheckoutView(TemplateView):
-    template_name = 'products/checkout.html'

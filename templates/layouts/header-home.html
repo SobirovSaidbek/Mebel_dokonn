@@ -73,8 +73,8 @@
                                 <tr>
                                     <td colspan="3" class="d-flex justify-content-center">
                                         <div class="cart-button">
-                                            <a href="users/cart.html" title="View Cart">View Cart</a>
-                                            <a href="products/checkout.html" title="Checkout">Checkout</a>
+                                            <a href="{% url 'users:cart' %}" title="View Cart">View Cart</a>
+                                            <a href="{% url 'orders:checkout' %}" title="Checkout">Checkout</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -159,7 +159,7 @@
                                     </a>
                                 </div>
                                 <div>
-                                    <a class="check-out" href="{% url 'users:checkout' %}" rel="nofollow"
+                                    <a class="check-out" href="{% url 'orders:checkout' %}" rel="nofollow"
                                        title="Checkout">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                         <span>Checkout</span>
@@ -369,8 +369,8 @@
                                         <tr>
                                             <td colspan="3" class="d-flex justify-content-center">
                                                 <div class="cart-button">
-                                                    <a href="users/cart.html" title="View Cart">View Cart</a>
-                                                    <a href="products/checkout.html" title="Checkout">Checkout</a>
+                                                    <a href="{% url 'users:cart' %}" title="View Cart">View Cart</a>
+                                                    <a href="{% url 'orders:checkout' %}" title="Checkout">Checkout</a>
                                                 </div>
                                             </td>
                                         </tr>
