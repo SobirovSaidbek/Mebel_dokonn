@@ -42,7 +42,6 @@ def send_email_verification(user):
             return False
 
 
-
 class RegisterView(CreateView):
     template_name = 'users/register.html'
     form_class = RegisterForm
@@ -147,10 +146,18 @@ class CartView(ListView):
         products = ProductModel.objects.filter(pk__in=cart)
         return products
 
+    def calculate_total_price(self):
+        cart = self.request.session.get('cart', [])
+        products = ProductModel.objects.filter(pk__in=cart)
+        total_price = 0
+        for product in products:
+            total_price += product.get_price()
+        return total_price
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total_price'] = self.calculate_total_price()
-
+        return context
 
 class ChangePassword(TemplateView):
     template_name = 'users/reset-password.html'

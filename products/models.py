@@ -88,6 +88,7 @@ class ProductModel(models.Model):
                                                 )
     sku = models.CharField(max_length=10, unique=True)
     count = models.PositiveIntegerField()
+    real_price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
 
     manufacture = models.ForeignKey(ProductManufacture, on_delete=models.CASCADE, related_name='products')
     colors = models.ManyToManyField(ProductColorModel, related_name='products')

@@ -39,14 +39,14 @@
                                                         <!--  product left content: image-->
                                                         <div class="product-line-grid-left col-md-2">
                                                             <span class="product-image media-middle">
-                                                                <a href="{% url 'products:detail' pk=products.id %}">
+                                                                <a href="{% url 'products:detail' pk=product.id %}">
                                                                     <img class="img-fluid" src="{{ product.image1.url }}" alt="Organic Strawberry Fruits">
                                                                 </a>
                                                             </span>
                                                         </div>
                                                         <div class="product-line-grid-body col-md-6">
                                                             <div class="product-line-info">
-                                                                <a class="label" href="{% url 'products:detail' pk=products.id %}" data-id_customization="0">Organic Strawberry Fruits</a>
+                                                                <a class="label" href="{% url 'products:detail' pk=product.id %}" data-id_customization="0">Organic Strawberry Fruits</a>
                                                             </div>
                                                             <div class="product-line-info product-price">
                                                                 <span class="value">${{ product.get_price }}</span>
@@ -98,7 +98,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <a href="../products/checkout.html" class="continue btn btn-primary pull-xs-right">
+                                    <a href="{% url 'users:checkout' %}" class="continue btn btn-primary pull-xs-right">
                                         Continue
                                     </a>
                                 </div>
@@ -110,9 +110,9 @@
                                             </div>
                                             <div class="cart-summary-line" id="cart-subtotal-products">
                                                 <span class="label js-subtotal">
-                                                    Total products:
+                                                    Total price:
                                                 </span>
-                                                <span class="value">£200.00</span>
+                                                <span class="value">${{ total_price }}</span>
                                             </div>
                                             <div class="cart-summary-line" id="cart-subtotal-shipping">
                                                 <span class="label">

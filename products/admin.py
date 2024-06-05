@@ -47,3 +47,4 @@ class ProductModelAdmin(admin.ModelAdmin):
     search_fields = ('name', 'short_description', 'long_description')
     list_filter = ('created_at', 'updated_at')
     inlines = [ProductImageModelAdmin]
+    readonly_fields = ['real_price']
