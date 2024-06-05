@@ -1,10 +1,22 @@
 from lib2to3.fixes.fix_input import context
 
 from django import template
+from sympy import Sum
 
 from products.models import ProductModel
 
 register = template.Library()
+
+
+@register.filter
+def get_cart_total(request):
+    cart = request.session.get('cart', [])
+    total_price = ProductModel.objects.filter(pk__in=cart).aggregate(Sum('real_price')).get('real_price__sum')
+    if total_price:
+        return total_price
+    return 0
+
+
 
 
 @register.filter

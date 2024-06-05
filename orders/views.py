@@ -39,6 +39,14 @@ def order_create(request):
                 )
             request.session['cart'] = []
 
-            return redirect('products:list')
+            return redirect('orders:history')
         else:
             return render(request, 'products/checkout.html')
+
+
+@login_required
+def order_history_view(request):
+    if request.method == 'GET':
+        orders = OrderModel.objects.filter(user=request.user)
+        context = {'orders': orders}
+        return render(request, 'users/order-history.html', context)

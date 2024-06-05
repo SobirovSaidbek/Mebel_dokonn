@@ -38,7 +38,7 @@
             <div class="desktop_cart">
                 <div class="blockcart block-cart cart-preview tiva-toggle">
                     <div class="header-cart tiva-toggle-btn">
-                        <span class="cart-products-count">1</span>
+                        <span class="cart-products-count">{{ request|get_user_cart|length }}</span>
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     </div>
                     <div class="dropdown-content">
@@ -68,7 +68,7 @@
                                 </tr>
                                 <tr class="total">
                                     <td colspan="2">Total:</td>
-                                    <td>£92.96</td>
+                                    <td>${{ request|get_cart_total }}</td>
                                 </tr>
 
                                 <tr>
@@ -152,6 +152,13 @@
                                        title="Log in to your customer account">
                                         <i class="fa fa-cog"></i>
                                         <span>My Account</span>
+                                    </a>
+                                </div>
+                                    <div>
+                                    <a class="login" href="{% url 'orders:history' %}" rel="nofollow"
+                                       title="Log in to your customer account">
+                                        <i class="fa fa-cog"></i>
+                                        <span>My History</span>
                                     </a>
                                 </div>
                                 {% endif %}
@@ -270,7 +277,7 @@
                                         {% endfor %}
                                         <tr class="total">
                                             <td colspan="2">Total:</td>
-                                            <td>£92.96</td>
+                                            <td>${{ request|get_cart_total }}</td>
                                         </tr>
 
                                         <tr>

@@ -127,7 +127,7 @@
                         <div id="acount" class="collapse">
 
                             <div class="account-list-content">
-                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_authenticated  %}
                                 <div>
                                     <a class="login" href="{% url 'users:account' %}" rel="nofollow"
                                        title="Log in to your customer account">
@@ -135,7 +135,14 @@
                                         <span>My Account</span>
                                     </a>
                                 </div>
-                            {% endif %}
+                                    <div>
+                                    <a class="login" href="{% url 'orders:history' %}" rel="nofollow"
+                                       title="Log in to your customer account">
+                                        <i class="fa fa-cog"></i>
+                                        <span>My History</span>
+                                    </a>
+                                </div>
+                                {% endif %}
                                 <div>
                                     {% if request.user.is_authenticated  %}
                                     <a class="login" href="{% url 'users:logout' %}" rel="nofollow"
