@@ -1,7 +1,7 @@
 from lib2to3.fixes.fix_input import context
 
 from django import template
-from sympy import Sum
+from django.db.models import Sum
 
 from products.models import ProductModel
 
