@@ -17,8 +17,6 @@ def get_cart_total(request):
     return 0
 
 
-
-
 @register.filter
 def get_user_cart(request):
     cart = request.session.get('cart', [])

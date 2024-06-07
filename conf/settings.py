@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-s$7y3^&gs)l^7l7b=v%v$4f+var5p9405ngek!3y7ff4psq9zx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -93,7 +94,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('uz', 'Uzbek'),
+]
+
+LOCALE_PATHS = (BASE_DIR / 'locale',)
 
 TIME_ZONE = 'UTC'
 
@@ -115,6 +123,12 @@ MEDIA_ROOT = 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+LOGIN_URL = 'users/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
 CKEDITOR_UPLOAD_PATH = 'media/'
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
@@ -129,6 +143,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
 
 EMAIL_HOST_USER = 'sobirovsaidbek156@gmail.com'
 EMAIL_HOST_PASSWORD = 'pkbq xipa xkuq qoda'
